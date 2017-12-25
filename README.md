@@ -1,2 +1,2 @@
 # sample
-Kocaeli university open source lab yii2 sample module
+Kocaeli university yii2 search module

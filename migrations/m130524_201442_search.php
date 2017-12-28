@@ -9,23 +9,52 @@ class m130524_201442_sample extends Migration
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
-            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+		CREATE USER 'suser'@'localhost' IDENTIFIED BY '1234';
+GRANT ALL PRIVILEGES ON *.* TO 'suser'@'localhost' IDENTIFIED BY '1234'
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%samples}}', [
-            'id' => $this->primaryKey(),
-            'title' => $this->string(200)->notNull(),
+        $this->createTable('{{Author}}', [
+            'id' => $this->int NOT NULL AUTO_INCREMENT,
+            'name' => $this->varchar(30)->notNull(),
 			'description' => $this->text()->notNull(),
-            'picture' => $this->text(),
+            'surname ' => $this->varchar(30)->notNull(),
+			'description' => $this->text()->notNull(),
+		'id' => $this->int,
+        ], $tableOptions);
+	    
+	    
+
+        $this->createTable('{{Book}}', [
+           'id' => $this->int NOT NULL AUTO_INCREMENT,
+            'name' => $this->varchar(30)->notNull(),
+			'description' => $this->text()->notNull(),
+            'public_date ' => $this->date(30)->notNull(),
+		 'category' => $this->int(30)->notNull(),
+			'description' => $this->text()->notNull(),
+            'numberpage ' => $this->int(30)->notNull(),
+		
+        ], $tableOptions);
+	    
+	    
+	    
+	      $this->createTable('{{Category}}', [
+           'id' => $this->int NOT NULL AUTO_INCREMENT,
+            'name' => $this->varchar(30)->notNull(),
+		
         ], $tableOptions);
 
-        $this->createTable('{{%sample_data}}', [
-            'id' => $this->primaryKey(),
-            'name' => $this->string(255)->notNull(),
-            'sample_id' => $this->integer(11)->notNull(),
+	    
+	     $this->createTable('{{Publisher}}', [
+            'id' => $this->int NOT NULL AUTO_INCREMENT,
+            'name' => $this->varchar(30)->notNull(),
+			'description' => $this->text()->notNull(),
+            'adress ' => $this->varchar(60)->notNull(),
+			'description' => $this->text()->notNull(),
+		
         ], $tableOptions);
 
+	    
         $this->createIndex(
             'idx_sample_data_sample_id-1',
             'sample_data',
@@ -33,19 +62,17 @@ class m130524_201442_sample extends Migration
         );
 
         $this->addForeignKey(
-          'fk_sample_data_sample_id-1',
-          'sample_data',
-          'sample_id',
-          'samples',
-          'id'
+        FOREIGN KEY (book_id) REFERENCES book(id)  ,
+	FOREIGN KEY (category) REFERENCES category(id)
         );
 
     }
 
     public function down()
     {
-        $this->dropForeignKey('fk_sample_data_sample_id-1','sample_data');
-        $this->dropIndex('idx_sample_data_sample_id-1','sample_data');
+        $this->dropForeignKey('`category`(`name`) VALUES ("Programming")');
+        $this->dropTable(book`(`name`, `public_date`, `category`, `numberpage`) VALUES ("Java",'2016-08-10',2,5)
+'');
         $this->dropTable('{{%sample_data}}');
         $this->dropTable('{{%samples}}');
     }

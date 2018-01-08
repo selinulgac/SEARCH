@@ -30,7 +30,7 @@ class Search extends \yii\db\ActiveRecord
         ];
     }
     /**
-     * @inheritdoc
+     * @inheritdo
      */
     public function attributeLabels()
     {

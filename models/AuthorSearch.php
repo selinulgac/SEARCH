@@ -22,7 +22,7 @@ class LibrarySearch extends Search
     public function searchAuthor($params)
     {
         $query = Search::find();
-        // add conditions that should always apply here
+        // add conditions that should always apply 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);

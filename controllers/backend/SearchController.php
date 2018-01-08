@@ -6,9 +6,7 @@ use kouosl\search\models\EmergencySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-/**
- * searchController implements the CRUD actions for Search model.
- */
+
 class SearchController extends Controller
 {
     /**

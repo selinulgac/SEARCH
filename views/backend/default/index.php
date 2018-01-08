@@ -1,15 +1,32 @@
 <?php
+use yii\helpers\Html;
+use yii\grid\GridView;
 /* @var $this yii\web\View */
-$this->title = 'WYP Sample Application';
+/* @var $searchModel kouosl\search\models\LibrarySearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+$this->title = 'Search';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-index">
+<div class="search-index">
 
-    <div class="jumbotron">
-        <h1>Kou Osl Yii2 App - Frontend</h1>
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('search', ['model' => $searchModel]); ?>
 
-        <p class="lead">Örnek uygulamayı başarılı bir şekilde çalıştırdınız.</p>
-
-        <p><a class="btn btn-lg btn-success" href="#">Modüller ve konfürgasyon!</a></p>
-    </div>
-
+    <p>
+        <?= Html::a('Create Search', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            'id',
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+	
+	
+	
+	
+	
 </div>
